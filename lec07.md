@@ -72,13 +72,13 @@ public class Add extends ConsoleProgram {
 
 ### **3. Comparison of `for` and `while` Loops**
 
-- **For Loops**: Used when the number of iterations is known (definite iteration).
+- **For Loops**: Used when the number of iterations is known **(definite iteration)**.
   ```java
   for (int i = 0; i < 5; i++) {
       System.out.println(i);
   }
   ```
-- **While Loops**: Used when the number of iterations is unknown (indefinite iteration).
+- **While Loops**: Used when the number of iterations is unknown **(indefinite iteration)**.
   ```java
   int i = 0;
   while (i < 5) {
@@ -169,7 +169,7 @@ private boolean isOdd(int n) {
 #### Example: Method Returning a Circle Object
 
 ```java
-private GOval createCircle(double x, double y, double radius, Color color) {
+private GOval createCircle(int x, int y, int radius, Color color) {
     GOval circle = new GOval(x - radius, y - radius, 2 * radius, 2 * radius);
     circle.setFilled(true);
     circle.setColor(color);
@@ -185,6 +185,10 @@ private GOval createCircle(double x, double y, double radius, Color color) {
   Example of using the method:
 
   ```java
+  GOval c = createCircle(100, 100, 50, Color.RED); // this gives back a GOval object
+  add(c); // add it to the canvas
+
+  // actually you can add it directly to the add method  
   add(createCircle(100, 100, 50, Color.RED));
   ```
 
