@@ -213,8 +213,10 @@ In this example:
   ```java
   int day = readInt("Enter day (0-6): ");
   switch (day) {
-      case 0: System.out.println("Sunday"); break;
-      case 1: System.out.println("Monday"); break;
+      case 0: System.out.println("Sunday");
+      break;
+      case 1: System.out.println("Monday");
+      break;
       default: System.out.println("Invalid day");
   }
   ```
