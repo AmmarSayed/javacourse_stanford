@@ -33,13 +33,32 @@ public class Add extends ConsoleProgram {
   
   public void run(){
     int total = 0;
+          
+    int value = readInt("Enter a number (0 to stop): "); // request at least once
+
+    while (val != SENTINEL) { // check if the value not equal to SENTINEL
+        total += value;
+        int value = readInt("Enter a number (0 to stop): "); // request for another input
+    }
+    System.out.println("Total: " + total);
+  }
+}
+```
+
+#### Example better approach to avoid repeating code
+
+```java
+public class Add extends ConsoleProgram {
+  public static final int SENTINEL = 0;
+  
+  public void run(){
+    int total = 0;
   
     while (true) {
         int value = readInt("Enter a number (0 to stop): ");
         if (value == SENTINEL) break;  // Exit the loop if sentinel value is entered
         total += value;
     }
-
     System.out.println("Total: " + total);
   }
 }
