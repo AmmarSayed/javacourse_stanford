@@ -28,13 +28,21 @@ This lecture dives deeper into **looping constructs, casting, methods, and the c
 #### Example: Loop to Sum User Input Until Zero
 
 ```java
-int total = 0;
-while (true) {
-    int value = readInt("Enter a number (0 to stop): ");
-    if (value == 0) break;  // Exit the loop if sentinel value is entered
-    total += value;
+public class Add extends ConsoleProgram {
+  public static final int SENTINEL = 0;
+  
+  public void run(){
+    int total = 0;
+  
+    while (true) {
+        int value = readInt("Enter a number (0 to stop): ");
+        if (value == SENTINEL) break;  // Exit the loop if sentinel value is entered
+        total += value;
+    }
+
+    System.out.println("Total: " + total);
+  }
 }
-System.out.println("Total: " + total);
 ```
 
 - **Key Points:**
