@@ -45,7 +45,7 @@ public class Add extends ConsoleProgram {
 }
 ```
 
-#### Example better approach to avoid repeating code
+#### Example: better approach to avoid repeating code
 
 ```java
 public class Add extends ConsoleProgram {
