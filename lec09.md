@@ -31,25 +31,32 @@ Watch the full lecture [here](https://www.youtube.com/watch?v=iYtri45lhtc).
 - **Structure of a Class**:
 
   ```java
-  public class MyClass {
+  public class myCounter {
       // Instance variables
-      private int value;
+      private int counter;
 
       // Constructor
-      public MyClass(int startValue) {
-          value = startValue;
+      public myCounter(int startValue) {
+          counter = startValue;
       }
+
+      public myCounter() {  // Another constructor without a parameter
+        counter = 1;
+    }
 
       // Method to increment value
       public int nextValue() {
-          return value++;
+        // int temp = counter;
+        // counter++;
+        // return temp;
+        return counter++;
       }
   }
   ```
 
 - **How to Create Objects**:
   ```java
-  MyClass obj = new MyClass(10);
+  MyClass obj = new myCounter(10);
   System.out.println(obj.nextValue());  // Outputs 10
   ```
 
@@ -68,15 +75,20 @@ Watch the full lecture [here](https://www.youtube.com/watch?v=iYtri45lhtc).
 Example:
 
 ```java
-public class Counter {
-    private int value;  // Private instance variable
+public class Incrementor {
+    private int counter;  // Private instance variable
 
-    public Counter(int start) {  // Public constructor
-        value = start;
+    public Incrementor(int start) {  // Public constructor
+        counter = start;
     }
 
+    public Incrementor() {  // Another constructor without a parameter
+        counter = 1;
+    }
+
+
     public int getValue() {  // Public method to access the value
-        return value;
+        return counter;
     }
 }
 ```
@@ -136,10 +148,12 @@ public class Example {
     private int value;
 
     public Example(int value) {
-        this.value = value;  // 'this.value' refers to the instance variable
+        this.value = value;  // 'this.value' refers to the instance/created object variable
     }
 }
 ```
+
+- Just give the parameters distinct names from member variables
 
 ---
 
@@ -195,7 +209,7 @@ public class Student {
     private int id;
     private double units;
 
-    public static final int UNITS_TO_GRADUATE = 180;
+    public static final int UNITS_TO_GRADUATE = 180; // This is a class variable which will be shared across all instances
 
     /**
      * Creates a new student with the given name and ID.
@@ -220,6 +234,11 @@ public class Student {
         return units >= UNITS_TO_GRADUATE;
     }
 
+    public boolean incrementUnits(int val) {
+        return units+=val;
+    }
+
+
     @Override
     public String toString() {
         return name + " (" + id + ")";
@@ -236,16 +255,18 @@ This program uses the `Student` class to demonstrate object creation and method 
 ```java
 public class Stanford extends ConsoleProgram {
     public void run() {
-        Student ben = new Student("Ben Newman", 1001);
-        ben.setUnits(179);
+        Student stud = new Student("Ben Newman", 1001);
+        stud.setUnits(179);
 
-        System.out.println(ben.getName() + " has " + ben.units + " units.");
-        System.out.println("Can graduate: " + ben.hasEnoughUnits());
+        System.out.println(stud.getName() + " has " + stud.units + " units.");
+        System.out.println(stud.getName() + "Can graduate: " + stud.hasEnoughUnits());
 
-        ben.setUnits(184);  // Increment units
-        System.out.println("Can graduate: " + ben.hasEnoughUnits());
+        System.out.println(stud.getName() + " takes CS106A!!");
+        stud.incrementUnits(5);  // Increment units
 
-        System.out.println("Student Info: " + ben.toString());
+        System.out.println(stud.getName() + "Can graduate: " + stud.hasEnoughUnits());
+
+        System.out.println(stud.getName() + "Student Info: " + stud.toString());
     }
 }
 ```
@@ -254,8 +275,9 @@ public class Stanford extends ConsoleProgram {
 
 ```
 Ben Newman has 179.0 units.
-Can graduate: false
-Can graduate: true
+Ben Newman Can graduate: false
+Ben Newman takes CS106A
+Ben Newman Can graduate: true
 Student Info: Ben Newman (1001)
 ```
 
