@@ -170,7 +170,9 @@ private double vx = 5;  // X velocity
 private double vy = 0;  // Y velocity
 
 public void run() {
-    setup();
+    setup(); // create the ball and added it to the screen
+
+    // simulation ends when ball goes off right hand end of screen
     while (ball.getX() < getWidth()) {
         moveBall();
         checkForCollision();
@@ -190,8 +192,16 @@ private void moveBall() {
 }
 
 private void checkForCollision() {
+  // determin if ball has dropped below the floor
     if (ball.getY() + DIAMETER >= getHeight()) {
-        vy = -vy * BOUNCE_REDUCE;  // Reverse and reduce speed
+      // change ball's Y velocity to now bounce upwords
+        vy = -vy * BOUNCE_REDUCE;  // Reverse the Y and reduce speed
+
+        // assume bounce will move the ball an amount above the
+        // floor equal to the amount it would have dropped
+        // below the floor
+        double diff = ball.getY() - (getHeight() - DIAMETER);
+        ball.move(0,-2*diff);
     }
 }
 ```
@@ -204,29 +214,10 @@ private void checkForCollision() {
 
 ---
 
-## **6. Drawing Arcs with GArc**
-
-- **`GArc`** allows drawing a **portion of a circle** or an oval.
-- **Specifying an Arc**:
-  - **Bounding Box**: Defines the rectangle containing the arc.
-  - **Start Angle**: Starting angle in degrees.
-  - **Sweep Angle**: How much of the circle to draw.
-
-#### Example:
-
-```java
-GArc arc = new GArc(50, 50, 100, 100, 45, 180);
-add(arc);
-```
-
-- This code draws **half of a circle** starting at a **45-degree angle**.
-
----
-
-## **7. GLabel: Working with Text**
+## **6. GLabel: Working with Text**
 
 - **GLabel** displays text on the canvas and allows customization.
-- **Centering Text Example**:
+- **Centering Lables Example**:
 
 ```java
 GLabel label = new GLabel("Hello, World!");
@@ -246,12 +237,46 @@ add(label);
 
 ---
 
+## **7. Drawing Arcs with GArc**
+
+- **`GArc`** allows drawing a **portion of a circle** or an oval.
+- **Specifying an Arc**:
+  - **Bounding Box**: Defines the rectangle containing the arc.
+  - **Start Angle**: Starting angle in degrees.
+  - **Sweep Angle**: How much of the circle to draw.
+
+#### Example:
+
+```java
+// cx and cy are coorindates of window center
+// d (diameter) is 0.8 times the screen height
+GArc arc1 = new GArc(d, d, 0, 90); // same diameter height and width, start from digree 0, and draw till 90 degrees
+GArc arc2 = new GArc(d, d, 45, 270); // same diameter height and width, start from digree 45 but counter, and draw till 270 degrees
+GArc arc2 = new GArc(d, d, -90, 45); // draw an arc 90 degrees down clock-wise `down`, then draw 45 degrees as normal counter-clock-wise
+add(arc1, cx - d / 2, cy - d / 2 ); // put the arc in the center of the screen
+add(arc1, cx - d / 2, cy - d / 2 ); // put the arc in the center of the screen
+arc1.setFilled(true);
+```
+
+- This code draws **half of a circle** starting at a **45-degree angle**.
+
+---
+
 ## **8. Interfaces in Graphics**
 
 - An **interface** defines a **set of methods** that can be shared across different classes.
-- **Example: GFillable Interface**:
-  - Methods: `setFilled()`, `isFilled()`
+- Interfaces in Java define a set of methods that a class can implement.
+- They provide a way to group together classes that share common behavior, even if they don't have a direct hierarchical relationship.
+- Interfaces allow for polymorphism, where objects of different classes can be treated as instances of a common interface and have their methods called in a uniform way.
+- **Example `GFillable` Interface**:
+  - Methods: `setFilled()`, `isFilled()`, `setFillColor(c)`, `getFillcolor()`
   - Implemented by: `GOval`, `GRect`, `GPolygon`
+- **Example `GResizable` Interface**:
+  - Method: `setSize(width,height)`, `setBounds()`
+  - Implemented by: `GImage`, `GOval`, `GRect`
+- **Example `GScalable` Interface**:
+  - Method: `scale(sf)`, `scale(xx,xy)`. Where `( sf )` is scale factor
+  - Implemented by: `GArc`, `GCompound`, `GLine`, `GImage`, `GOval`, `GPolygon`, `GRect`
 
 ---
 
